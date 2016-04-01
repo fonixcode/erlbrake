@@ -33,7 +33,7 @@
 end).
 -define(SERVER, ?MODULE).
 
--record(state, {environment, api_key :: string(), queue = queue:new() :: queue() , locked = false :: boolean(), pause_time = 1000 :: integer(), max_queue = 30 :: integer()}).
+-record(state, {environment, api_key :: string(), queue = queue:new() , locked = false :: boolean(), pause_time = 1000 :: integer(), max_queue = 30 :: integer()}).
 
 
 %% =============================================================================
