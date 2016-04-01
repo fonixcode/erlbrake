@@ -54,7 +54,7 @@
 end).
 -define(SERVER, ?MODULE).
 
--record(state, {environment, api_key :: string(), queue = queue:new() :: queue() , locked = false :: boolean(), pause_time = 1000 :: integer(), max_queue = 30 :: integer()}).
+-record(state, {environment, api_key :: string(), queue = queue:new() :: queue:queue() , locked = false :: boolean(), pause_time = 1000 :: integer(), max_queue = 30 :: integer()}).
 -record(notice, {
     %% Keys map to elements in Airbrake XSD (see http://airbrake.io/airbrake_2_2.xsd)
     %% reason      : /notice/error/class
