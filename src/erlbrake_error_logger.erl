@@ -100,7 +100,15 @@ handle_error_msg(_, _, "** Cowboy handler" ++ _, Data, S) ->
             state_data(State)]),
     {ok, S};
 handle_error_msg(_, _, Format, Data, S) ->
-    notify(error, Format, Format, Data, []),
+    % ignore SSL warning messages
+    case Format =:= "SSL: ~p: ~s\n" andalso length(Data) =:= 2 andalso
+      re:run(lists:nth(2, Data), <<".*:Warning:.*">>,[anchored, {capture, none}]) =:= match of
+      true ->
+        ok;
+      _ ->
+        notify(error, Format, Format, Data, [])
+    end,
+
     {ok, S}.
 
 handle_error_report(_, _, supervisor_report, Report, S) ->
